@@ -18,7 +18,7 @@ struct GuideView: View {
                 Spacer().frame(height: 40)
                 Text("Att göra").titleStyle()
                 Spacer().frame(height: 6)
-                Text("för att rädda din själ").italicStyle()
+                Text("för att rädda din själ").accentStyle(Theme.muted)
                 Spacer().frame(height: 28)
 
                 HStack(spacing: 12) {
@@ -60,7 +60,7 @@ struct AttGoraRad: View {
             HStack(alignment: .top, spacing: 14) {
                 ZStack {
                     if todo.done {
-                        Rectangle().fill(Theme.accent)
+                        Rectangle().fill(Theme.action)
                         Image("IkonBock").resizable().frame(width: 12, height: 12)
                     } else {
                         Rectangle().stroke(Theme.muted, lineWidth: 1)

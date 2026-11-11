@@ -97,6 +97,7 @@ struct Flikrad: View {
             item(.guide, icon: "IkonGuide", title: "GUIDE")
         }
         .frame(height: 72, alignment: .top)
+        .padding(.bottom, 0)
         .background(Theme.background)
         .overlay(alignment: .top) { Rectangle().fill(Theme.line).frame(height: 1) }
     }

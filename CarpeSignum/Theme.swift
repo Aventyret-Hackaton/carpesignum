@@ -8,20 +8,23 @@ enum Theme {
     static let background = Color(hex: 0x0A0A0B)  // color/bg
     static let surface = Color(hex: 0x141416)     // color/surface
     static let line = Color(hex: 0x2A2A2E)        // color/line
-    static let accent = Color(hex: 0xD8B46A)      // color/accent
-    static let onAccent = Color(hex: 0x0A0A0B)    // color/on-accent
+    static let accent = Color(hex: 0xBCA7FF)      // color/accent (ljuslila)
+    static let action = Color(hex: 0x311098)      // color/action (knappar, ikryssade rutor)
     static let text = Color(hex: 0xECE8DF)        // color/text
-    static let muted = Color(hex: 0x8C8981)       // color/muted
-    static let faint = Color(hex: 0x55534E)       // color/faint
+    static let muted = Color(hex: 0xDBD8DE)       // color/muted
+    static let faint = Color(hex: 0x898681)       // color/faint
 
     static let gutter: CGFloat = 32
 
-    // Typsnitt. Designen använder Geist Mono och Instrument Serif.
-    // Om typsnittsfilerna finns i mappen Fonts används de, annars systemets
-    // närmaste motsvarighet (SF Mono och New York).
+    // Typsnitt. Designen använder Geist Mono (i mappen Fonts) och Geist för
+    // brödtext. Istället för Geist används systemets typsnitt, som är mycket likt.
+    // Kibernetyk Mono Medium används för citat och underrubriker.
     static let monoFamily = "Geist Mono"
-    static let serifName = "InstrumentSerif-Regular"
-    static let serifItalicName = "InstrumentSerif-Italic"
+    static let kibernetykName = "KibernetykMono-Medium"
+
+    static func kibernetyk(_ size: CGFloat) -> Font {
+        Fonts.available(kibernetykName) ? .custom(kibernetykName, fixedSize: size) : mono(size, .medium)
+    }
 
     static func mono(_ size: CGFloat, _ weight: Font.Weight = .regular) -> Font {
         if Fonts.available(monoFamily) {
@@ -30,26 +33,20 @@ enum Theme {
         return .system(size: size, weight: weight, design: .monospaced)
     }
 
-    static func serif(_ size: CGFloat) -> Font {
-        Fonts.available(serifName) ? .custom(serifName, fixedSize: size)
-            : .system(size: size, weight: .regular, design: .serif)
-    }
-
-    static func serifItalic(_ size: CGFloat) -> Font {
-        Fonts.available(serifItalicName) ? .custom(serifItalicName, fixedSize: size)
-            : .system(size: size, weight: .regular, design: .serif).italic()
+    static func sans(_ size: CGFloat, _ weight: Font.Weight = .regular) -> Font {
+        .system(size: size, weight: weight)
     }
 }
 
 /// Textstilar från Figma: Mono/Label, Mono/Title osv.
 extension View {
-    /// Mono/Label: 11 pt, spärrad 12 %.
+    /// Mono/Label: 11 pt, versaler, spärrad 12 %.
     func labelStyle(_ color: Color = Theme.muted) -> some View {
-        font(Theme.mono(11)).tracking(1.32).foregroundStyle(color)
+        font(Theme.mono(11)).tracking(1.32).textCase(.uppercase).foregroundStyle(color)
     }
-    /// Mono/Title: 28 pt Light.
+    /// Mono/Title: 28 pt.
     func titleStyle() -> some View {
-        font(Theme.mono(28, .light)).tracking(-0.56).lineSpacing(28 * 0.2 - 4).foregroundStyle(Theme.text)
+        font(Theme.mono(28)).tracking(-0.28).lineSpacing(1.6).foregroundStyle(Theme.text)
     }
     /// Mono/Small: 12 pt Light.
     func smallStyle(_ color: Color = Theme.muted) -> some View {
@@ -59,13 +56,13 @@ extension View {
     func bodyStyle(_ color: Color = Theme.text) -> some View {
         font(Theme.mono(14)).lineSpacing(3).foregroundStyle(color)
     }
-    /// Serif/Reading: 22 pt.
+    /// Reading: Geist Light 16 pt (systemets typsnitt).
     func readingStyle() -> some View {
-        font(Theme.serif(22)).lineSpacing(Fonts.available(Theme.serifName) ? 0 : 5).foregroundStyle(Theme.text)
+        font(Theme.sans(16, .light)).lineSpacing(3).foregroundStyle(Theme.text)
     }
-    /// Serif/Italic: 18 pt.
-    func italicStyle(_ color: Color = Theme.muted) -> some View {
-        font(Theme.serifItalic(18)).lineSpacing(Fonts.available(Theme.serifItalicName) ? 0 : 4).foregroundStyle(color)
+    /// Accent: Kibernetyk Mono Medium 14 pt.
+    func accentStyle(_ color: Color = Theme.accent) -> some View {
+        font(Theme.kibernetyk(14)).tracking(-0.14).lineSpacing(5).foregroundStyle(color)
     }
 }
 
@@ -126,12 +123,12 @@ struct Knapp: View {
             Text(etikett.uppercased())
                 .font(Theme.mono(14, .medium))
                 .tracking(1.12)
-                .foregroundStyle(variant == .primar ? Theme.onAccent : Theme.text)
+                .foregroundStyle(Theme.text)
                 .frame(maxWidth: .infinity)
                 .frame(height: 52)
                 .background {
                     if variant == .primar {
-                        RoundedRectangle(cornerRadius: 24).fill(Theme.accent)
+                        RoundedRectangle(cornerRadius: 24).fill(Theme.action)
                     } else {
                         RoundedRectangle(cornerRadius: 24).stroke(Theme.line, lineWidth: 1)
                     }
@@ -147,12 +144,10 @@ struct Datachip: View {
     let text: String
     var body: some View {
         Text(text)
-            .font(Theme.mono(11))
-            .tracking(1.32)
-            .foregroundStyle(Theme.muted)
+            .labelStyle()
             .padding(.horizontal, 10)
             .padding(.vertical, 6)
-            .overlay(RoundedRectangle(cornerRadius: 2).stroke(Theme.line, lineWidth: 1))
+            .overlay(RoundedRectangle(cornerRadius: 4).stroke(Theme.line, lineWidth: 1))
     }
 }
 
@@ -175,14 +170,15 @@ struct Enhetsrad: View {
 /// Komponent "Signalkarta". Snurrar sakta när kosmos arbetar.
 struct Signalkarta: View {
     var spinning = false
+    var size: CGFloat = 326
     @State private var angle: Double = 0
 
     var body: some View {
         Image("Signalkarta")
             .resizable()
             .scaledToFit()
-            .frame(width: 260, height: 262)
-            .rotationEffect(.degrees(angle), anchor: UnitPoint(x: 0.5, y: 130 / 262))
+            .frame(width: size, height: size * 261.972 / 260)
+            .rotationEffect(.degrees(angle), anchor: UnitPoint(x: 0.5, y: 130 / 261.972))
             .onAppear {
                 guard spinning else { return }
                 withAnimation(.linear(duration: 24).repeatForever(autoreverses: false)) { angle = 360 }

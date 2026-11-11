@@ -45,10 +45,10 @@ struct HoroscopeView: View {
                     Spacer().frame(height: 24)
                     // "Något dramatiskt"
                     Text(reading.quote)
-                        .italicStyle(Theme.accent)
+                        .accentStyle()
                         .fixedSize(horizontal: false, vertical: true)
-                        .padding(.leading, 16)
-                        .overlay(alignment: .leading) { Rectangle().fill(Theme.accent).frame(width: 1) }
+                        .padding(.leading, 18)
+                        .overlay(alignment: .leading) { Rectangle().fill(Theme.accent).frame(width: 2) }
 
                     if let weather = weather.reading {
                         Spacer().frame(height: 24)

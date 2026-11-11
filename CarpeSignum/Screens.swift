@@ -5,32 +5,28 @@ struct StartScreen: View {
     let pair: () -> Void
 
     var body: some View {
-        VStack(spacing: 0) {
-            Text("✶  PARKOPPLAD MED ÖDET")
-                .labelStyle()
-                .frame(maxWidth: .infinity, alignment: .leading)
-            Spacer(minLength: 12)
+        VStack(alignment: .leading, spacing: 0) {
+            Image("Logotype")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 88, height: 61)
+                .accessibilityLabel("Carpe Signum")
+            Text("Stjärnorna var aldrig nära nog")
+                .labelStyle(Theme.faint)
+                .padding(.top, 24)
+                .padding(.bottom, 4)
+            Spacer().frame(height: 72)
             Signalkarta()
-            Spacer().frame(height: 48)
-            Text("Carpe Signum")
-                .font(Theme.mono(34, .light))
-                .tracking(-1.02)
-                .foregroundStyle(Theme.text)
-            Spacer().frame(height: 12)
-            Text("Stjärnorna var aldrig nära nog.")
-                .italicStyle()
-            Spacer().frame(height: 24)
-            Text("Ett horoskop som bygger på vilka enheter du varit nära idag, hur nära och hur länge.")
-                .smallStyle()
-                .multilineTextAlignment(.center)
-            Spacer(minLength: 12)
+                .frame(maxWidth: .infinity)
+            Spacer(minLength: 24)
             Knapp(etikett: "Koppla till Bluetooth", action: pair)
             Spacer().frame(height: 16)
-            Text("Bara astrologen får se din data.")
-                .labelStyle(Theme.faint)
+            Text("(Bara astrologen får se din data)")
+                .labelStyle()
+                .frame(maxWidth: .infinity)
         }
         .padding(.horizontal, Theme.gutter)
-        .padding(.top, 20)
+        .padding(.top, 16)
         .padding(.bottom, 8)
     }
 }
@@ -56,13 +52,13 @@ struct ScanningScreen: View {
                 Text(String(format: "SKANNAR · %02d:%02d", Int(elapsed) / 60, Int(elapsed) % 60))
                     .labelStyle(Theme.faint)
                     .frame(maxWidth: .infinity, alignment: .leading)
-                Spacer(minLength: 12)
-                Signalkarta(spinning: true)
-                Spacer().frame(height: 40)
+                Spacer().frame(height: 37)
                 Text("Hämtar signaler…").titleStyle()
                 Spacer().frame(height: 8)
                 Text("\(signals.count) enheter · \(houses) hus hittills").smallStyle()
-                Spacer().frame(height: 32)
+                Spacer(minLength: 16)
+                Signalkarta(spinning: true)
+                Spacer(minLength: 16)
                 VStack(spacing: 0) {
                     ForEach(signals.prefix(4)) { signal in
                         Enhetsrad(enhet: names[signal.id] ?? "Okänd enhet", varde: Astrology.dbm(signal.rssi))
@@ -70,10 +66,10 @@ struct ScanningScreen: View {
                 }
                 .overlay(alignment: .top) { Rectangle().fill(Theme.line).frame(height: 1) }
                 .frame(height: 185, alignment: .top)
-                Spacer(minLength: 12)
             }
             .padding(.horizontal, Theme.gutter)
-            .padding(.top, 20)
+            .padding(.top, 16)
+            .padding(.bottom, 8)
         }
         .onAppear {
             startedAt = Date()
@@ -111,24 +107,24 @@ struct ConsultingScreen: View {
             Text("KONSULTERAR SIGNALERNA")
                 .labelStyle(Theme.faint)
                 .frame(maxWidth: .infinity, alignment: .leading)
-            Spacer(minLength: 12)
-            Signalkarta(spinning: true)
-            Spacer().frame(height: 40)
+            Spacer().frame(height: 37)
             Text("Tar fram din guide…").titleStyle()
             Spacer().frame(height: 8)
             Text(weighing).smallStyle()
-            Spacer().frame(height: 32)
+            Spacer(minLength: 16)
+            Signalkarta(spinning: true)
+            Spacer(minLength: 16)
             GeometryReader { geo in
                 ZStack(alignment: .leading) {
-                    Rectangle().fill(Theme.line)
-                    Rectangle().fill(Theme.accent).frame(width: geo.size.width * progress)
+                    Capsule().fill(Theme.line)
+                    Capsule().fill(Theme.accent).frame(width: geo.size.width * progress)
                 }
             }
-            .frame(height: 1)
-            Spacer(minLength: 12)
+            .frame(height: 4)
         }
         .padding(.horizontal, Theme.gutter)
-        .padding(.top, 20)
+        .padding(.top, 16)
+        .padding(.bottom, 24)
         .onAppear {
             withAnimation(.easeInOut(duration: Self.duration)) { progress = 1 }
             DispatchQueue.main.asyncAfter(deadline: .now() + Self.duration + 0.2) {
