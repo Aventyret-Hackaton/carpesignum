@@ -21,9 +21,11 @@ enum Theme {
     // Kibernetyk Mono Medium används för citat och underrubriker.
     static let monoFamily = "Geist Mono"
     static let kibernetykName = "KibernetykMono-Medium"
+    static let kibernetykRegularName = "KibernetykMono-Regular"
 
-    static func kibernetyk(_ size: CGFloat) -> Font {
-        Fonts.available(kibernetykName) ? .custom(kibernetykName, fixedSize: size) : mono(size, .medium)
+    static func kibernetyk(_ size: CGFloat, regular: Bool = false) -> Font {
+        let name = regular ? kibernetykRegularName : kibernetykName
+        return Fonts.available(name) ? .custom(name, fixedSize: size) : mono(size, regular ? .regular : .medium)
     }
 
     static func mono(_ size: CGFloat, _ weight: Font.Weight = .regular) -> Font {
@@ -44,9 +46,9 @@ extension View {
     func labelStyle(_ color: Color = Theme.muted) -> some View {
         font(Theme.mono(11)).tracking(1.32).textCase(.uppercase).foregroundStyle(color)
     }
-    /// Mono/Title: 28 pt.
+    /// Mono/Title: Kibernetyk Mono Regular 24 pt.
     func titleStyle() -> some View {
-        font(Theme.mono(28)).tracking(-0.28).lineSpacing(1.6).foregroundStyle(Theme.text)
+        font(Theme.kibernetyk(24, regular: true)).tracking(-0.24).lineSpacing(1).foregroundStyle(Theme.text)
     }
     /// Mono/Small: 12 pt Light.
     func smallStyle(_ color: Color = Theme.muted) -> some View {
@@ -58,7 +60,7 @@ extension View {
     }
     /// Reading: Geist Light 16 pt (systemets typsnitt).
     func readingStyle() -> some View {
-        font(Theme.sans(16, .light)).lineSpacing(3).foregroundStyle(Theme.text)
+        font(Theme.sans(15, .light)).lineSpacing(0).foregroundStyle(Theme.text)
     }
     /// Accent: Kibernetyk Mono Medium 14 pt.
     func accentStyle(_ color: Color = Theme.accent) -> some View {
@@ -100,6 +102,14 @@ enum Fonts {
 }
 
 extension Date {
+    /// "ONS 11 NOV"
+    var swedishShortDay: String {
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "sv_SE")
+        formatter.dateFormat = "EEE d MMM"
+        return formatter.string(from: self).replacingOccurrences(of: ".", with: "").uppercased()
+    }
+
     /// "ONSDAG 11 NOVEMBER"
     var swedishDayHeader: String {
         let formatter = DateFormatter()
@@ -144,7 +154,7 @@ struct Datachip: View {
     let text: String
     var body: some View {
         Text(text)
-            .labelStyle()
+            .labelStyle(Theme.faint)
             .padding(.horizontal, 10)
             .padding(.vertical, 6)
             .overlay(RoundedRectangle(cornerRadius: 4).stroke(Theme.line, lineWidth: 1))

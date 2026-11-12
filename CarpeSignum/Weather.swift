@@ -1,13 +1,13 @@
 import Foundation
 
 /// Bonusteknik: data från ett öppet API (Open-Meteo, gratis och utan nyckel).
-/// Hämtar vädret i en avlägsen stad och låter det påverka ett av dina hus.
+/// Hämtar vädret i en avlägsen stad och låter det påverka ett av dina rum.
 /// Utan internet visas helt enkelt ingenting.
 @Observable
 final class WeatherOracle {
     struct Reading {
         let label: String   // "FJÄRRSIGNAL · ULAANBAATAR"
-        let line: String    // "Det snöar, −12 °C. Det påverkar ditt sjätte hus."
+        let line: String    // "Det snöar, −12 °C. Det påverkar ditt sjätte rum."
     }
 
     private(set) var reading: Reading?
@@ -37,7 +37,7 @@ final class WeatherOracle {
         let key = "\(day.year ?? 0)-\(day.month ?? 0)-\(day.day ?? 0)"
         guard fetchedDay != key else { return }
 
-        // Samma stad och samma hus hela dagen.
+        // Samma stad och samma rum hela dagen.
         var rng = SeededRandom(seed: UInt64(abs(key.hashValueStable)))
         let city = Self.cities.randomElement(using: &rng)!
         let house = Self.ordinals.randomElement(using: &rng)!
@@ -60,7 +60,7 @@ final class WeatherOracle {
                 let phrase = Self.phrase(for: decoded.current.weather_code)
                 reading = Reading(
                     label: "FJÄRRSIGNAL · \(city.name.uppercased())",
-                    line: "\(phrase), \(tempText). Det påverkar ditt \(house) hus."
+                    line: "\(phrase), \(tempText). Det påverkar ditt \(house) rum."
                 )
                 fetchedDay = key
             } catch {

@@ -40,4 +40,4 @@ Samma horoskop gäller hela dagen. Nästa dag hoppar appen över startskärmen o
 
 - `CarpeSignum/Library.swift`: alla texter till horoskop och att göra-listor. Lägg gärna till fler.
 - `CarpeSignum/Theme.swift`: färger, typsnitt och komponenter från Figma.
-- `CarpeSignum/Astrology.swift`: hur signaler blir hus, tecken och kontorsplaneter.
+- `CarpeSignum/Astrology.swift`: hur signaler blir rum, tecken och kontorsplaneter.

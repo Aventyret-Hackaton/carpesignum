@@ -1,9 +1,9 @@
 import Foundation
 
-/// Carpe Signums "astrologi": hur signaler blir hus, tecken och planeter.
+/// Carpe Signums "astrologi": hur signaler blir rum, tecken och planeter.
 enum Astrology {
 
-    // MARK: Hus (I–XII) och rum (fem rum i hemmet)
+    // MARK: Rum (I–XII) och rumstyp (fem rum i hemmet)
 
     struct House {
         let number: Int        // 1–12
@@ -17,7 +17,7 @@ enum Astrology {
     private static let ordinals = ["första", "andra", "tredje", "fjärde", "femte", "sjätte",
                                    "sjunde", "åttonde", "nionde", "tionde", "elfte", "tolfte"]
 
-    /// Husnumret följer signalstyrkan: −71 dBm hamnar i VII, −88 dBm i III.
+    /// Rumsnumret följer signalstyrkan: −71 dBm hamnar i VII, −88 dBm i III.
     /// Rummet är ett av hemmets fem, ju närmare desto mer privat.
     static func house(for rssi: Int) -> House {
         let number = max(1, min(12, (rssi + 100) / 4))

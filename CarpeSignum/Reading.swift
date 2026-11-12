@@ -17,7 +17,7 @@ struct BasisRow: Codable, Hashable {
 /// Dagens läsning: horoskopet och guiden.
 struct Reading: Codable {
     let date: Date
-    let headline: String       // "Kaffemaskinen står i ditt sjunde hus"
+    let headline: String       // "Kaffemaskinen står i ditt sjunde rum"
     let paragraphs: [String]   // två stycken i serif
     let quote: String          // "Något dramatiskt" i guld
     let chips: [String]
@@ -106,11 +106,11 @@ enum Astrologer {
                 "dbm": Astrology.dbm(strongest.rssi),
                 "svagast": Astrology.dbm(weakest.rssi),
                 "tecken": sign.name,
-                "teckenhus": "\(sign.genitive) hus",
+                "teckenrum": "\(sign.genitive) rum",
                 "rum": Astrology.house(for: strongest.rssi).room,
                 // Liten bokstav mitt i meningen ("hälsa på kaffemaskinen"); meningar börjar ändå med stor.
                 "planet": lowerFirst(name(planet)),
-                "planethus": house.roman,
+                "planetnr": house.roman,
                 "planetrum": house.room,
                 "planetord": house.ordinal,
                 "foljare": followerPhrase,

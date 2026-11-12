@@ -15,8 +15,8 @@ struct HoroscopeView: View {
             ScrollView {
                 VStack(alignment: .leading, spacing: 0) {
                     HStack {
-                        Text(reading.date.swedishDayHeader)
-                            .labelStyle()
+                        Text("Dagens horoskop: \(reading.date.swedishShortDay)")
+                            .labelStyle(Theme.accent)
                             // Dolt reglage för demon: håll inne på datumet.
                             .onLongPressGesture(minimumDuration: 1.2) { showSettings = true }
                         Spacer()
@@ -27,22 +27,20 @@ struct HoroscopeView: View {
                         .accessibilityLabel("Så räknade vi")
                     }
 
-                    Spacer().frame(height: 40)
-                    Text("DAGENS HOROSKOP").labelStyle(Theme.accent)
-                    Spacer().frame(height: 10)
+                    Spacer().frame(height: 50)
                     Text(reading.headline)
                         .titleStyle()
                         .fixedSize(horizontal: false, vertical: true)
 
-                    Spacer().frame(height: 28)
+                    Spacer().frame(height: 24)
                     ForEach(Array(reading.paragraphs.enumerated()), id: \.offset) { index, paragraph in
-                        if index > 0 { Spacer().frame(height: 16) }
+                        if index > 0 { Spacer().frame(height: 12) }
                         Text(paragraph)
                             .readingStyle()
                             .fixedSize(horizontal: false, vertical: true)
                     }
 
-                    Spacer().frame(height: 24)
+                    Spacer().frame(height: 32)
                     // "Något dramatiskt"
                     Text(reading.quote)
                         .accentStyle()
@@ -59,7 +57,7 @@ struct HoroscopeView: View {
                             .fixedSize(horizontal: false, vertical: true)
                     }
 
-                    Spacer().frame(height: 24)
+                    Spacer().frame(height: 48)
                     FlowLayout(spacing: 8) {
                         ForEach(reading.chips, id: \.self) { Datachip(text: $0) }
                     }
@@ -112,8 +110,8 @@ struct BasisSheet: View {
                 .titleStyle()
                 .fixedSize(horizontal: false, vertical: true)
             Spacer().frame(height: 12)
-            Text("Varje enhet du varit nära har vägts efter signalstyrka och tid. Ditt hus är rummet där signalen var starkast.")
-                .smallStyle()
+            Text("Varje enhet du varit nära har vägts efter signalstyrka och tid. Ditt rum är där signalen var starkast.")
+                .readingStyle()
                 .fixedSize(horizontal: false, vertical: true)
             Spacer().frame(height: 24)
             VStack(spacing: 0) {

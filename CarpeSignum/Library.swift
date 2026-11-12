@@ -6,10 +6,10 @@ import Foundation
 ///   {dbm}        starkaste signalen, t.ex. "−41 dBm"
 ///   {svagast}    svagaste signalen, t.ex. "−97 dBm"
 ///   {tecken}     dagens tecken, t.ex. "Oxen"
-///   {teckenhus}  t.ex. "Oxens hus"
+///   {teckenrum}  t.ex. "Oxens rum"
 ///   {rum}        rummet för starkaste signalen, t.ex. "badrummet"
 ///   {planet}     en kontorsplanet eller pryl, t.ex. "Kaffemaskinen"
-///   {planethus}  planetens hus som romersk siffra, t.ex. "III"
+///   {planetnr}  planetens rumsnummer som romersk siffra, t.ex. "III"
 ///   {planetrum}  planetens rum, t.ex. "köket"
 ///   {foljare}    prylen som varit nära längst, t.ex. "en okänd Apple-enhet"
 ///   {tid}        hur länge, t.ex. "tre timmar"
@@ -21,9 +21,9 @@ enum Library {
     // MARK: Horoskop, rubriken
 
     static let headlines: [String] = [
-        "{planet} står i ditt {planetord} hus",
-        "{planet} har gått in i ditt {planetord} hus",
-        "{planet} vandrar genom ditt {planetord} hus",
+        "{planet} står i ditt {planetord} rum",
+        "{planet} har gått in i ditt {planetord} rum",
+        "{planet} vandrar genom ditt {planetord} rum",
         "{planet} har tagit plats i {planetrum}",
         "{planet} har vänt sig mot dig",
     ]
@@ -31,36 +31,36 @@ enum Library {
     // MARK: Horoskop, stycke 1: signalstyrkan
 
     static let openings: [String] = [
-        "Med en signalstyrka på {dbm} i {teckenhus} bör du undvika viktiga beslut före lunch.",
-        "Signalen står i {dbm} i {teckenhus}. Det är ett gynnsamt läge för att säga nej till saker du redan sagt ja till.",
-        "{teckenhus} lyser idag med {dbm}. Det har inte hänt sedan i tisdags, och då gick det som det gick.",
+        "Med en signalstyrka på {dbm} i {teckenrum} bör du undvika viktiga beslut före lunch.",
+        "Signalen står i {dbm} i {teckenrum}. Det är ett gynnsamt läge för att säga nej till saker du redan sagt ja till.",
+        "{teckenrum} lyser idag med {dbm}. Det har inte hänt sedan i tisdags, och då gick det som det gick.",
         "När {tecken} mäter {dbm} på morgonen bör man inte lita på sitt eget omdöme förrän efter klockan tre.",
-        "En signalstyrka på {dbm} i {teckenhus} talar för förändring. Förändringen är liten och gäller troligen din lunch.",
+        "En signalstyrka på {dbm} i {teckenrum} talar för förändring. Förändringen är liten och gäller troligen din lunch.",
         "{tecken} står i {dbm} idag. Det är starkare än vad som är lämpligt för en onsdag, oavsett vilken dag det är.",
-        "Dagens starkaste signal, {dbm}, faller i {teckenhus}. Gör inga större inköp, särskilt inte av sladdar.",
-        "Med {dbm} i {teckenhus} är du ovanligt mottaglig. Undvik möten där någon säger ”snabb fråga”.",
-        "Signalerna i {teckenhus} ligger på {dbm}. Det är ett tecken på att du har rätt, men inte idag.",
-        "{dbm} i {teckenhus} innebär att dina relationer stärks, framför allt den till din laddare.",
-        "När signalen når {dbm} i {teckenhus} bör man vara försiktig med att svara ”alla” på e-post.",
-        "{teckenhus} mäts idag till {dbm}. Den som föds under denna signal blir sällan tekniskt ansvarig, men ofta tillfrågad.",
+        "Dagens starkaste signal, {dbm}, faller i {teckenrum}. Gör inga större inköp, särskilt inte av sladdar.",
+        "Med {dbm} i {teckenrum} är du ovanligt mottaglig. Undvik möten där någon säger ”snabb fråga”.",
+        "Signalerna i {teckenrum} ligger på {dbm}. Det är ett tecken på att du har rätt, men inte idag.",
+        "{dbm} i {teckenrum} innebär att dina relationer stärks, framför allt den till din laddare.",
+        "När signalen når {dbm} i {teckenrum} bör man vara försiktig med att svara ”alla” på e-post.",
+        "{teckenrum} mäts idag till {dbm}. Den som föds under denna signal blir sällan tekniskt ansvarig, men ofta tillfrågad.",
     ]
 
-    // MARK: Horoskop, stycke 2: en andra planet i sitt hus
+    // MARK: Horoskop, stycke 2: en andra planet i sitt rum
     // (här betyder {planet} den andra planeten, inte den i rubriken)
 
     static let planets: [String] = [
-        "{planet} har dragit sig tillbaka till det {planetord} huset. Det talar för tålamod, men emot mjölkskum.",
-        "{planet} står i ditt {planetord} hus. Det talar för tålamod, men emot mjölkskum.",
+        "{planet} har dragit sig tillbaka till det {planetord} rummet. Det talar för tålamod, men emot mjölkskum.",
+        "{planet} står i ditt {planetord} rum. Det talar för tålamod, men emot mjölkskum.",
         "{planet} har gått in i {planetrum}. Det är ett gott tecken för den som väntar, och ett dåligt för den som har bråttom.",
-        "{planet} befinner sig i ditt {planetord} hus. Lyssna på den, även om den bara säger ett enda ljud.",
+        "{planet} befinner sig i ditt {planetord} rum. Lyssna på den, även om den bara säger ett enda ljud.",
         "Med {planet} i {planetrum} bör du hålla dina åsikter om kontorsmöbler för dig själv.",
-        "{planet} står i {planethus}. Det är en konstellation som brukar föregå missförstånd i kalendern.",
-        "När {planet} vandrar in i ditt {planetord} hus blir det svårare att hitta rätt mötesrum.",
+        "{planet} står i {planetnr}. Det är en konstellation som brukar föregå missförstånd i kalendern.",
+        "När {planet} vandrar in i ditt {planetord} rum blir det svårare att hitta rätt mötesrum.",
         "{planet} står stilla i {planetrum}. Gör du detsamma kommer dagen att gå bra.",
-        "{planet} i {planethus} talar för samarbete. Samarbetet kommer inte att fungera, men det talar för det.",
-        "{planet} har tagit plats i ditt {planetord} hus och kommer att stanna där tills någon flyttar den.",
+        "{planet} i {planetnr} talar för samarbete. Samarbetet kommer inte att fungera, men det talar för det.",
+        "{planet} har tagit plats i ditt {planetord} rum och kommer att stanna där tills någon flyttar den.",
         "Det är ovanligt att {planet} står i {planetrum} så här tidigt i veckan. Ta det som en varning eller ett erbjudande.",
-        "{planet} i ditt {planetord} hus innebär att någon nära dig har en åsikt om din kaffe.",
+        "{planet} i ditt {planetord} rum innebär att någon nära dig har en åsikt om din kaffe.",
         "{planet} står i opposition till din telefon. Låt dem lösa det själva.",
     ]
 
@@ -129,7 +129,7 @@ enum Library {
             "Ge din telefon till den person du litar minst på, i en timme.",
             "Ändra din adress till {planetrum}.",
             "Ring din mamma och säg att {planet} hälsar.",
-            "Sälj soffan. Den står i fel hus.",
+            "Sälj soffan. Den står i fel rum.",
             "Byt tandkräm till ett märke du aldrig har hört talas om.",
             "Tatuera in {dbm} någonstans där ingen ser det.",
             "Lämna jobbet tidigt och kom tillbaka sent, samma dag.",
@@ -137,7 +137,7 @@ enum Library {
         // 5: drastiskt
         [
             "Gör slut med din partner och lämna landet.",
-            "Sälj ditt hus och köp ett närmare {planet}.",
+            "Sälj din bostad och flytta närmare {planet}.",
             "Byt namn till {tecken} och flytta till en annan tidszon.",
             "Säg upp dig och starta ett företag tillsammans med {planet}.",
             "Lämna allt du äger i {planetrum} och börja om på nytt i hallen.",

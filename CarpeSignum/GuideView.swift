@@ -14,19 +14,12 @@ struct GuideView: View {
     private var list: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 0) {
-                Text("GUIDE · \(reading.date.swedishDayHeader)").labelStyle()
+                Text("Guide: \(reading.date.swedishShortDay)").labelStyle(Theme.accent)
                 Spacer().frame(height: 40)
                 Text("Att göra").titleStyle()
                 Spacer().frame(height: 6)
-                Text("för att rädda din själ").accentStyle(Theme.muted)
+                Text("för att rädda din själ").smallStyle()
                 Spacer().frame(height: 28)
-
-                HStack(spacing: 12) {
-                    Text("VARDAGLIGT").labelStyle(Theme.faint)
-                    Rectangle().fill(Theme.line).frame(height: 1)
-                    Text("DRASTISKT").labelStyle(Theme.accent)
-                }
-                Spacer().frame(height: 8)
 
                 VStack(spacing: 0) {
                     ForEach(reading.todos) { todo in
