@@ -1,0 +1,127 @@
+/* Carpe Signum – webbversion. Färger och typsnitt från Figma-designen. */
+
+@font-face { font-family: "Geist Mono"; src: url("fonts/GeistMono.ttf") format("truetype"); font-weight: 100 900; font-display: swap; }
+@font-face { font-family: "Kibernetyk Mono"; src: url("fonts/KibernetykMono-Regular.ttf") format("truetype"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Kibernetyk Mono"; src: url("fonts/KibernetykMono-Medium.ttf") format("truetype"); font-weight: 500; font-display: swap; }
+
+:root {
+  --bg: #0A0A0B;
+  --surface: #141416;
+  --line: #2A2A2E;
+  --accent: #BCA7FF;
+  --action: #311098;
+  --text: #ECE8DF;
+  --muted: #DBD8DE;
+  --faint: #898681;
+  --gutter: 32px;
+  --mono: "Geist Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  --kib: "Kibernetyk Mono", "Geist Mono", ui-monospace, monospace;
+  --sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; background: var(--bg); color: var(--text); }
+body { font-family: var(--mono); -webkit-font-smoothing: antialiased; overflow: hidden; }
+button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+
+/* Telefonbred kolumn, även på datorn */
+#app {
+  position: relative;
+  max-width: 430px;
+  height: 100dvh;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+@media (min-width: 600px) {
+  #app { border-left: 1px solid var(--line); border-right: 1px solid var(--line); }
+}
+
+.screen {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: max(40px, env(safe-area-inset-top)) var(--gutter) max(24px, env(safe-area-inset-bottom));
+  animation: fade .5s ease;
+  min-height: 0;
+}
+.scroll { overflow-y: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+.scroll::-webkit-scrollbar { display: none; }
+@keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+
+.flex { flex: 1; }
+
+/* Textstilar */
+.label { font: 400 11px/1.4 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+.title { font: 400 24px/1.2 var(--kib); letter-spacing: -0.01em; color: var(--text); }
+.small { font: 300 12px/1.5 var(--mono); color: var(--muted); }
+.body { font: 400 14px/1.5 var(--mono); color: var(--text); }
+.reading { font: 300 15px/1.25 var(--sans); color: var(--text); }
+.accentText { font: 500 14px/1.35 var(--kib); letter-spacing: -0.01em; color: var(--accent); }
+.c-accent { color: var(--accent); }
+.c-faint { color: var(--faint); }
+.c-muted { color: var(--muted); }
+.center { text-align: center; }
+
+/* Knapp */
+.knapp {
+  width: 100%; height: 52px; border-radius: 24px;
+  font: 500 14px/1 var(--mono); letter-spacing: .08em; text-transform: uppercase;
+  color: var(--text); background: var(--action);
+  transition: transform .1s ease, opacity .2s;
+}
+.knapp:active { transform: scale(.98); opacity: .9; }
+.knapp.kontur { background: transparent; border: 1px solid var(--line); }
+
+/* Signalkarta */
+.karta { display: flex; justify-content: center; }
+.karta img { width: min(326px, 100%); aspect-ratio: 260 / 262; display: block; }
+.karta.snurrar img { animation: spin 24s linear infinite; transform-origin: 50% 49.6%; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Enhetsrad */
+.rader { border-top: 1px solid var(--line); }
+.rad { display: flex; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--line); }
+.rad img { width: 6px; height: 6px; }
+.rad .namn { flex: 1; font: 400 14px/1.5 var(--mono); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+/* Datachip */
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { border: 1px solid var(--line); border-radius: 4px; padding: 6px 10px; }
+
+/* Citat */
+.citat { border-left: 2px solid var(--accent); padding-left: 18px; }
+
+/* Flikrad */
+.flikrad { display: flex; height: calc(72px + env(safe-area-inset-bottom)); padding-bottom: env(safe-area-inset-bottom); border-top: 1px solid var(--line); background: var(--bg); flex-shrink: 0; }
+.flik { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 6px; padding-top: 14px; color: var(--faint); }
+.flik.aktiv { color: var(--accent); }
+.flik svg { width: 18px; height: 18px; }
+
+/* Topprad med frågetecken */
+.topprad { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.topprad img { width: 32px; height: 32px; display: block; }
+
+/* Att göra-rad */
+.todo { display: flex; gap: 14px; align-items: flex-start; padding: 14px 0; border-bottom: 1px solid var(--line); width: 100%; text-align: left; }
+.ruta { width: 18px; height: 18px; flex-shrink: 0; border: 1px solid var(--muted); display: flex; align-items: center; justify-content: center; margin-top: 2px; }
+.todo.klar .ruta { background: var(--action); border-color: var(--action); }
+.ruta img { width: 12px; height: 12px; }
+.todo .text { flex: 1; display: flex; flex-direction: column; gap: 6px; }
+.todo.klar .body { color: var(--muted); }
+.todo .text .label { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.todo .text { min-width: 0; }
+
+/* Förlopp */
+.forlopp { height: 4px; border-radius: 8px; background: var(--line); overflow: hidden; }
+.forlopp div { height: 100%; width: 0; border-radius: 8px; background: var(--accent); transition: width 2.8s ease-in-out; }
+
+/* Ark (Så räknade vi) och meny */
+.dimma { position: fixed; inset: 0; background: rgba(0,0,0,.6); z-index: 10; animation: fade .3s ease; display: flex; align-items: flex-end; justify-content: center; }
+.ark { width: 100%; max-width: 430px; background: var(--surface); border-top: 1px solid var(--line); padding: 20px var(--gutter) max(40px, env(safe-area-inset-bottom)); animation: up .35s ease; }
+@keyframes up { from { transform: translateY(100%); } to { transform: none; } }
+.handtag { width: 32px; height: 2px; background: var(--faint); margin: 0 auto; }
+
+#stardust { position: fixed; inset: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 20; }
