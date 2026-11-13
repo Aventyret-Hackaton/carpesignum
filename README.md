@@ -41,3 +41,16 @@ Samma horoskop gäller hela dagen. Nästa dag hoppar appen över startskärmen o
 - `CarpeSignum/Library.swift`: alla texter till horoskop och att göra-listor. Lägg gärna till fler.
 - `CarpeSignum/Theme.swift`: färger, typsnitt och komponenter från Figma.
 - `CarpeSignum/Astrology.swift`: hur signaler blir rum, tecken och kontorsplaneter.
+
+## Webbversion
+
+I mappen `web/` finns en webbversion med samma design, texter och flöde. Den ligger på GitHub Pages:
+https://aventyret-hackaton.github.io/carpesignum/
+
+Webbläsare i telefoner kan inte skanna Bluetooth, så webbversionen använder simulerade signaler (samma som appens demoläge). Gyro, stjärnstoft och väder fungerar som i appen.
+
+Så uppdaterar du webbversionen efter en ändring i `web/`:
+
+```bash
+git subtree push --prefix web origin gh-pages
+```

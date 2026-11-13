@@ -1,0 +1,14 @@
+<svg width="260" height="261.972" viewBox="0 0 260 261.972" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Signalkarta">
+<circle id="Bana 260" cx="130" cy="130" r="129.5" stroke="#2A2A2E"/>
+<circle id="Bana 180" cx="130" cy="130" r="89.5" stroke="#2A2A2E"/>
+<circle id="Bana 100" cx="130" cy="130" r="49.5" stroke="#2A2A2E"/>
+<path id="Du" d="M131.518 125V127.58L133.058 126.76H135V128.9L132.969 130L135 131.1V133.24H133.058L131.518 132.42V135H128.482V132.42L126.942 133.24H125V131.1L127.031 130L125 128.9V126.76H126.942L128.482 127.58V125H131.518Z" fill="#BCA7FF"/>
+<circle id="Enhet" cx="161.081" cy="90.8337" r="3" fill="#BCA7FF"/>
+<circle id="Enhet_2" cx="52.88" cy="176.395" r="2.5" fill="#DBD8DE"/>
+<circle id="Enhet_3" cx="208.982" cy="173.148" r="2.5" fill="#BCA7FF"/>
+<circle id="Enhet_4" cx="34.1388" cy="42.1898" r="2" fill="#898681"/>
+<circle id="Enhet_5" cx="132.703" cy="259.972" r="2" fill="#DBD8DE"/>
+<circle id="Enhet_6" cx="252.118" cy="85.4233" r="2" fill="#898681"/>
+</g>
+</svg>
